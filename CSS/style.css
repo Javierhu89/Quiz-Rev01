@@ -1,0 +1,134 @@
+:root {
+    --background: #E0FFFF;
+    --header: #D2691E;
+}
+* {
+    background-color: var(--background);
+    font-family: Brandon Text,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
+}
+header{
+    margin: 0;
+    box-shadow: 2px 3px 5px black;
+}
+h1{
+    background-color: var(--header);
+    color: white;
+    margin: 0;
+    padding: 15px 0 15px 40px;
+    border: black ridge 2px;
+    box-shadow: 2px 2px 15px #222 inset;
+}
+.botones{
+    border-radius: 15px;
+    border: 3px solid black;
+    color: white;
+    background-color: #D2691E;
+    font-size: 18px;
+    padding: 3px 15px 5px 15px;
+    margin-top: 7px;
+}
+.recuadros{
+    margin: 20px 40px 10px 40px;
+    background-color: white;
+    padding: 5px 15px 10px 15px;
+    border-radius: 10px;
+    border: 2px solid black;
+    box-shadow: 5px 5px 5px black;
+    font-size: 12px;
+    text-align: center;
+}
+h2{
+    color:#D2691E;
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+#imgquiz{
+    width: 100%;
+}
+h3 , label, form, div, button{
+    background-color: white;
+}
+#pregunta{
+    font-size: 19px;
+    color: var(--header);
+    margin-top: 7px;
+}
+label{
+    font-size: 14px;
+}
+#div1, #div2, #div3, #div4 {
+    margin: 15px 0 15px 0;
+}
+form {
+    margin-bottom: 0px;
+}
+#div1 {
+    background-color: #66CDAA;
+    margin-top: 20px;
+    padding: 13px 5px 13px 5px;
+    border-radius: 15px;
+}
+#div2 {
+    background-color: #4682B4;
+    padding: 13px 5px 13px 5px;
+    border-radius: 15px;
+}
+#div3 {
+    background-color: #FF69B4;
+    padding: 13px 5px 13px 5px;
+    border-radius: 15px;
+}
+#div4 {
+    background-color: #e7b338;
+    padding: 13px 5px 13px 5px;
+    border-radius: 15px;
+    margin-bottom: 0;
+}
+#next{
+    border-radius: 10px;
+    padding: 5px 10px 5px 10px;
+    background-color: var(--header);
+    color: white;
+    margin: 20px auto 15px auto;
+    border: 2px solid black;
+    box-shadow: 2px 2px 2px black;
+}
+#respuesta1 {
+    background-color: #66CDAA;
+    font-weight: bold;
+    color: white;
+}
+#respuesta2 {
+    background-color: #4682B4;
+    font-weight: bold;
+    color: white;
+}
+#respuesta3 {
+    background-color: #FF69B4;
+    font-weight: bold;
+    color: white;
+}
+#respuesta4 {
+    background-color: #e7b338;
+    font-weight: bold;
+    color: white;
+}
+h6 {
+    text-align: right;
+    background-color: white;
+    font-size: 14px;
+    font-style: italic;
+    margin: -25px 0 0 0;
+}
+input{
+    width: 0%;
+}
+#minions{
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+#valores{
+    font-size: 30px;
+}
