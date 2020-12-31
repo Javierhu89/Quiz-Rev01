@@ -4,6 +4,7 @@ let j;
 let numrespuestas = 1;
 let respuestasbuenas = 0;
 let marcas = 0;
+let value = 1;
 let comprobador = 0;
 let acumulado = JSON.parse(localStorage.getItem("estadisticas"));
 let resultados = document.getElementById("resultados")
@@ -56,12 +57,20 @@ input4.setAttribute("name","reply");
 if (resultados != null){
     let final = document.createElement("h2");
     let valores = document.createElement("h3");
+    let agradecimiento = document.createElement("h4");
+    let regresar = document.createElement("button");
+    regresar.innerText="Volver a Intentarlo";
+    regresar.setAttribute("onclick", "location.href='./question.html'");
+    regresar.setAttribute("id", "regresar");
     let longitud = acumulado.length - 1;
     valores.setAttribute("id","valores");
     valores.innerText= `${acumulado[longitud].aciertos}/10`;
     final.innerText = "Aquí van tus resultados:"
+    agradecimiento.innerText = "¡Muchas gracias por jugar!"
     document.getElementById("resultados").appendChild(final);
     document.getElementById("resultados").appendChild(valores);
+    document.getElementById("resultados").appendChild(agradecimiento);
+    document.getElementById("resultados").appendChild(regresar);
 }
  if (question != null && numrespuestas<11){
       printQuestions()
@@ -156,11 +165,13 @@ next.addEventListener("click", function(e){
         next.innerText = "Results!"
         next.setAttribute("onclick", "location.href='./results.html'");
         comprobador = 1;
+        if (value == 1){
         let img = document.createElement("img");
         img.setAttribute("id","minions");
         img.setAttribute("src", "./img/aciertos.gif" );
         question.appendChild(img);
-        numrespuestas = 11 ; // No quiero que vuelva a entrar porque ya están las 10
+        } value = 0;
+      
     }
     } else {
         alert("Chose one option")
