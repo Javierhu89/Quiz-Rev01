@@ -1,5 +1,9 @@
 let questions = {};
+let fechas = [];
+let values = [];
 let respuestas = [];
+let media = 0;
+let acumulativo = 0;
 let j;
 let numrespuestas = 1;
 let respuestasbuenas = 0;
@@ -18,7 +22,13 @@ let contador = document.createElement("h6");
 let pregunta = document.createElement("h3");
 pregunta.setAttribute("id","pregunta");
 let div1 = document.createElement("div");
+let div5 = document.createElement("div");
+let div6 = document.createElement("div");
+let div7 = document.createElement("div");
 div1.setAttribute("id","div1");
+div5.setAttribute("id","div5");
+div6.setAttribute("id","div6");
+div7.setAttribute("id","div7");
 let respuesta1 = document.createElement("label");
 let input1 = document.createElement("input");
 input1.setAttribute("type","radio");
@@ -53,15 +63,71 @@ respuesta4.setAttribute("for","input4");
 input4.setAttribute("id","input4");
 input4.setAttribute("type","radio");
 input4.setAttribute("name","reply");
-
+let intentos = [];
+let fechadeintentos =[];
+let graficos = document.getElementById("graficos")
+if (graficos != null && acumulado!=null){
+let canvas = document.createElement("canvas");
+canvas.setAttribute("id","canvas");
+document.getElementById("graficos").appendChild(canvas)
+    for (let k = 0; k<acumulado.length ; k++){
+        fechas.push(acumulado[k].fecha.slice(0,10));
+        values.push(acumulado[k].aciertos);
+    }
+    for (let k = 0; k<fechas.length ; k++){
+        if (fechas[k] === fechas[k+1]){
+            media = media +1;
+        } else {
+            if (media > 0){
+                for (let p = 0 ; p<=media ; p++){
+                    acumulativo = acumulativo + values[(k-media+p)];
+                }
+                intentos.push(acumulativo/(media+1));
+                fechadeintentos.push(fechas[k]);
+                acumulativo = 0;
+            } else {
+                intentos.push(values[k]);
+                fechadeintentos.push(fechas[k]);
+            }
+            media = 0;
+        }
+        }
+    let myLineChart = new Chart(canvas, {
+        type: 'line',
+        data: {
+            labels: fechadeintentos,
+            datasets: [{
+                fill: false,
+                borderColor : 'rgb(210, 105, 30)',
+                backgroundColor : 'rgb(210, 105, 30)',
+                label: 'Nº de Aciertos por día',
+                data: intentos,
+                pointStyle: 'rectRot'
+            }]
+        },
+        
+    scaleOverride: true, 
+    scaleSteps: 2, 
+    scaleStepWidth: Math.ceil(10/2), 
+    scaleStartValue: 0,
+    options: {
+            showLines: true,
+            }
+        }
+    );
+}
 if (resultados != null){
     let final = document.createElement("h2");
     let valores = document.createElement("h3");
     let agradecimiento = document.createElement("h4");
     let regresar = document.createElement("button");
+    let inicio = document.createElement("button");
     regresar.innerText="Volver a Intentarlo";
+    inicio.innerText="🏠";
     regresar.setAttribute("onclick", "location.href='./question.html'");
     regresar.setAttribute("id", "regresar");
+    inicio.setAttribute("onclick", "location.href='./home.html'");
+    inicio.setAttribute("id", "inicio");
     let longitud = acumulado.length - 1;
     valores.setAttribute("id","valores");
     valores.innerText= `${acumulado[longitud].aciertos}/10`;
@@ -70,6 +136,7 @@ if (resultados != null){
     document.getElementById("resultados").appendChild(final);
     document.getElementById("resultados").appendChild(valores);
     document.getElementById("resultados").appendChild(agradecimiento);
+    document.getElementById("resultados").appendChild(inicio);
     document.getElementById("resultados").appendChild(regresar);
 }
  if (question != null && numrespuestas<11){
@@ -94,16 +161,19 @@ function printQuestion (){
     respuesta3.innerHTML = respuestas[2];
     respuesta4.innerHTML = respuestas[3];
     document.getElementById("formulario").appendChild(pregunta);
-    document.getElementById("formulario").appendChild(div1);
+    document.getElementById("formulario").appendChild(div7);
+    document.getElementById("div7").appendChild(div5);
+    document.getElementById("div5").appendChild(div1);
     document.getElementById("div1").appendChild(respuesta1);
     document.getElementById("respuesta1").appendChild(input1);
-    document.getElementById("formulario").appendChild(div2);
+    document.getElementById("div5").appendChild(div2);
     document.getElementById("div2").appendChild(respuesta2);
     document.getElementById("respuesta2").appendChild(input2);
-    document.getElementById("formulario").appendChild(div3);
+    document.getElementById("div7").appendChild(div6);
+    document.getElementById("div6").appendChild(div3);
     document.getElementById("div3").appendChild(respuesta3);
     document.getElementById("respuesta3").appendChild(input3);
-    document.getElementById("formulario").appendChild(div4);
+    document.getElementById("div6").appendChild(div4);
     document.getElementById("div4").appendChild(respuesta4);
     document.getElementById("respuesta4").appendChild(input4);
     document.getElementById("question").appendChild(next);
@@ -117,6 +187,7 @@ function printQuestion (){
 next.addEventListener("click", function(e){
     e.preventDefault();
     if (marcas ==1){
+        if (comprobador == 0){
         if (input1.checked == true){
             if (respuesta1.innerText == respuestas[j]){
                 respuestasbuenas = respuestasbuenas + 1;
@@ -136,7 +207,7 @@ next.addEventListener("click", function(e){
             if (respuesta4.innerText == respuestas[j]){
                 respuestasbuenas = respuestasbuenas + 1;
             }
-        }
+        }}
     if (numrespuestas<10){
         numrespuestas = numrespuestas + 1;
         div1.removeAttribute("style");
@@ -170,10 +241,9 @@ next.addEventListener("click", function(e){
         img.setAttribute("id","minions");
         img.setAttribute("src", "./img/aciertos.gif" );
         question.appendChild(img);
-        } value = 0;
-      
+        }value = 0;      
     }
-    } else {
+    } else if (marcas != 1 || comprobador == 1) {
         alert("Chose one option")
     }
 })

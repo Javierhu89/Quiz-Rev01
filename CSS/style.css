@@ -28,7 +28,7 @@ h1{
     margin-top: 7px;
 }
 .recuadros{
-    margin: 20px 40px 10px 40px;
+    margin: 10px 40px 10px 40px;
     background-color: white;
     padding: 5px 15px 10px 15px;
     border-radius: 10px;
@@ -85,7 +85,7 @@ form {
     border-radius: 15px;
     margin-bottom: 0;
 }
-#next, #regresar{
+#next, #regresar , #inicio{
     border-radius: 10px;
     padding: 5px 10px 5px 10px;
     background-color: var(--header);
@@ -138,10 +138,169 @@ input{
     margin-top: 10px;
     padding-top: 11.5px;
     padding-bottom: 20px;
-
 }
 h4{
     font-size: 15px;
     margin-bottom: 0;
     margin-top: 5px;
+}
+#canvas{
+    padding: 25px 0 15px 0;
+    background-color: white;
+}
+#inicio{
+    margin-right: 20px;
+}
+@media screen and (min-width: 435px) {
+#resultados{
+    width: 300px;
+}
+    
+article{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#div5, #div6 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:0px;
+}
+#div7{
+    margin: 0px;
+}
+#div1{
+    width: 145px;
+    align-items: center;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    height: 50px;
+    margin: 7px 7px 7px 7px;
+    padding: 10px 14px 10px 14px;
+}
+#div2{
+    width: 145px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    text-align: center;
+    height: 50px;
+    margin: 7px 7px 7px 7px;
+    padding: 10px 14px 10px 14px;
+}
+#div3{
+    width: 145px;
+    align-items: center;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    height: 50px;
+    margin: 7px 7px 7px 7px;
+    padding: 10px 14px 10px 14px;
+}
+#div4{
+    width: 145px;
+    align-items: center;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    height: 50px;
+    margin: 7px 7px 7px 7px;
+    padding: 10px 14px 10px 14px;
+}
+.recuadros{
+    margin: 20px 10px 10px 5px;
+    width: 170px;
+    height: auto;
+}
+#question{
+    width: auto;
+}
+#canvas{
+    width: 150px;
+}
+#next{
+    margin-top: 7px;
+}
+}
+@media screen and (min-width: 500px) {
+#resultados{
+    width: 400px;
+    font-size: 16px;
+}
+#minions{
+    width: 87%;
+}
+#pregunta{ 
+    font-size: 20px;
+}
+label{
+    font-size: 16px;
+}
+#question{
+    width: 460px;
+}
+#div1, #div2 ,#div3 ,#div4 {
+    width: 200px;
+}
+@media screen and (min-width: 735px) {
+    #minions{
+        width: 90%;
+    }
+    .recuadros{
+        width: 300px;
+    }
+    #pregunta{ 
+        font-size: 24px;
+    }
+    label{
+        font-size: 18px;
+    }
+    .recuadros{
+        font-size: 14px;
+    }
+    #question{
+        width: 675px;
+    }
+    #div1, #div2 ,#div3 ,#div4 {
+        width: 400px;
+        height: 60px;
+    }
+    #canvas{
+        width: 300px;
+    }  
+}
+@media screen and (min-width: 1000px) {
+    #resultados{
+        width: 400px;
+        font-size: 19.5px;
+    }
+    #minions{
+        width: 92%;
+    }
+    #div1, #div2 ,#div3 ,#div4 {
+        height: 95px;
+    }
+    #graficos{
+        margin-left: 15px;
+    }
+    #pregunta{ 
+        font-size: 26px;
+    }
+    label{
+        font-size: 20px;
+    }
+    .recuadros{
+        width: 420px;
+        margin-left: 50px;
+    }
+    #question{
+        width: 900px;
+        margin-left: 0px;
+    }
+    #canvas{
+        width: 325px;
+    }  
 }
