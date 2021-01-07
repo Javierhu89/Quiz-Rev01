@@ -126,7 +126,7 @@ if (resultados != null){
     inicio.innerText="🏠";
     regresar.setAttribute("onclick", "location.href='./question.html'");
     regresar.setAttribute("id", "regresar");
-    inicio.setAttribute("onclick", "location.href='./home.html'");
+    inicio.setAttribute("onclick", "location.href='./index.html'");
     inicio.setAttribute("id", "inicio");
     let longitud = acumulado.length - 1;
     valores.setAttribute("id","valores");
