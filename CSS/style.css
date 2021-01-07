@@ -226,6 +226,12 @@ article{
 }
 }
 @media screen and (min-width: 500px) {
+#canvas{
+    width: 120px;
+}
+#graficos{
+    width: 230px;
+}
 #resultados{
     width: 400px;
     font-size: 16px;
@@ -269,8 +275,11 @@ label{
         height: 60px;
     }
     #canvas{
-        width: 300px;
-    }  
+        width: 320px;
+    }
+    #graficos{
+        width: 330px;
+    } 
 }
 @media screen and (min-width: 1000px) {
     #resultados{
@@ -301,6 +310,9 @@ label{
         margin-left: 0px;
     }
     #canvas{
-        width: 325px;
+        width: 450px;
+    }
+    #graficos{
+        width: 470px;
     }  
 }

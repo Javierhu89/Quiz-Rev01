@@ -102,7 +102,7 @@ document.getElementById("graficos").appendChild(canvas)
                 backgroundColor : 'rgb(210, 105, 30)',
                 label: 'Nº de Aciertos por día',
                 data: intentos,
-                pointStyle: 'rectRot'
+                pointStyle: 'rectRot',
             }]
         },
         
@@ -112,6 +112,18 @@ document.getElementById("graficos").appendChild(canvas)
     scaleStartValue: 0,
     options: {
             showLines: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontSize: 11
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontSize: 9
+                    }
+                }]
+            }
             }
         }
     );
