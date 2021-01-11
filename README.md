@@ -1,7 +1,7 @@
 # Quiz-Rev01
 
 QuizResurrection
-EJERCICIO: Quiz navideño christmas_tree Logo
+EJERCICIO: Quiz navideño
 
 Partiendo del Quiz que hemos ido haciendo estos días, volveremos a realizar refactorización para añadir nuevas funcionalidades.
 
