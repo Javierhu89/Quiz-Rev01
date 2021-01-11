@@ -81,7 +81,7 @@ if (graficos != null){
 let canvas = document.createElement("canvas");
 canvas.setAttribute("id","canvas");
 document.getElementById("graficos").appendChild(canvas)
-    db.collection("quiz").orderBy("fecha").get().then((querySnapshot) => {
+    db.collection("quiz").orderBy("fechaorden").get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
         acumulado.push(doc.data());
         console.log(acumulado);
@@ -169,7 +169,6 @@ if (resultados != null){
     .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             acumulado.push(doc.data());
-            console.log(acumulado);
         })})
     .then(item => {
     let longitud = acumulado.length - 1;
@@ -260,9 +259,10 @@ next.addEventListener("click", function(e){
             mes = mes + 1;
             let dia = (new Date()).getDate();
             var año = (new Date()).getFullYear();
+            if (mes<11){
+                mes = "0"+ mes;
+            }
             let diaactual = dia + "/" + mes + "/" + año;
-            console.log(diaactual);
-
             db.collection("quiz").add({
                 fecha: diaactual,
                 fechaorden: new Date (),
