@@ -1,4 +1,16 @@
+let firebaseConfig = {
+    apiKey: "AIzaSyCzXPHJKYRG5yodUIlmgQ_cf21RD22bQDI",
+    authDomain: "demofirebase-4db21.firebaseapp.com",
+    projectId: "demofirebase-4db21",
+    storageBucket: "demofirebase-4db21.appspot.com",
+    messagingSenderId: "306173996933",
+    appId: "1:306173996933:web:1a435aef39ae9702c6deec"
+  };
+  // Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+let db = firebase.firestore();
 let questions = {};
+let acumulado = [];
 let fechas = [];
 let values = [];
 let respuestas = [];
@@ -10,7 +22,6 @@ let respuestasbuenas = 0;
 let marcas = 0;
 let value = 1;
 let comprobador = 0;
-let acumulado = JSON.parse(localStorage.getItem("estadisticas"));
 let resultados = document.getElementById("resultados")
 let question = document.getElementById("question")
 let formulario = document.createElement("form");
@@ -66,10 +77,16 @@ input4.setAttribute("name","reply");
 let intentos = [];
 let fechadeintentos =[];
 let graficos = document.getElementById("graficos")
-if (graficos != null && acumulado!=null){
+if (graficos != null){
 let canvas = document.createElement("canvas");
 canvas.setAttribute("id","canvas");
 document.getElementById("graficos").appendChild(canvas)
+    db.collection("quiz").orderBy("fecha").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        acumulado.push(doc.data());
+        console.log(acumulado);
+    });
+}).then(item => {
     for (let k = 0; k<acumulado.length ; k++){
         fechas.push(acumulado[k].fecha.slice(0,10));
         values.push(acumulado[k].aciertos);
@@ -105,7 +122,6 @@ document.getElementById("graficos").appendChild(canvas)
                 pointStyle: 'rectRot',
             }]
         },
-        
     scaleOverride: true, 
     scaleSteps: 2, 
     scaleStepWidth: Math.ceil(10/2), 
@@ -128,6 +144,7 @@ document.getElementById("graficos").appendChild(canvas)
         }
     );
 }
+)}
 if (resultados != null){
     let final = document.createElement("h2");
     let valores = document.createElement("h3");
@@ -140,9 +157,7 @@ if (resultados != null){
     regresar.setAttribute("id", "regresar");
     inicio.setAttribute("onclick", "location.href='./index.html'");
     inicio.setAttribute("id", "inicio");
-    let longitud = acumulado.length - 1;
     valores.setAttribute("id","valores");
-    valores.innerText= `${acumulado[longitud].aciertos}/10`;
     final.innerText = "Aquí van tus resultados:"
     agradecimiento.innerText = "¡Muchas gracias por jugar!"
     document.getElementById("resultados").appendChild(final);
@@ -150,7 +165,16 @@ if (resultados != null){
     document.getElementById("resultados").appendChild(agradecimiento);
     document.getElementById("resultados").appendChild(inicio);
     document.getElementById("resultados").appendChild(regresar);
-}
+    db.collection("quiz").orderBy("fechaorden").get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            acumulado.push(doc.data());
+            console.log(acumulado);
+        })})
+    .then(item => {
+    let longitud = acumulado.length - 1;
+    valores.innerText= `${acumulado[longitud].aciertos}/10`;
+    })}
  if (question != null && numrespuestas<11){
       printQuestions()
      .then(printQuestion)
@@ -230,24 +254,31 @@ next.addEventListener("click", function(e){
         printQuestions()
         .then(printQuestion)
     } if (numrespuestas == 10 && marcas == 1){
-        if (comprobador == 1){
-            let nuevoresultado = {
-                fecha: new Date (),
+        if (comprobador == 0){
+            comprobador = 1;
+            let mes = (new Date()).getMonth();
+            mes = mes + 1;
+            let dia = (new Date()).getDate();
+            var año = (new Date()).getFullYear();
+            let diaactual = dia + "/" + mes + "/" + año;
+            console.log(diaactual);
+
+            db.collection("quiz").add({
+                fecha: diaactual,
+                fechaorden: new Date (),
                 aciertos: respuestasbuenas
-            }
-            if (acumulado!=null){
-                acumulado.push(nuevoresultado);
-            }else {
-                acumulado = [nuevoresultado];
-            }
-            let subir = JSON.stringify(acumulado);
-            localStorage.setItem("estadisticas", subir);
+            })
+            .then(function(docRef) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function(error) {
+                console.error("Error adding document: ", error);
+            });
         }
         formulario.remove()
         contador.remove()
         next.innerText = "Results!"
         next.setAttribute("onclick", "location.href='./results.html'");
-        comprobador = 1;
         if (value == 1){
         let img = document.createElement("img");
         img.setAttribute("id","minions");
